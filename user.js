@@ -1,15 +1,35 @@
-function createBankAccount(num){
-    let balance = num
-    function deposit(value){
-        
-    }
-    function withdraw(value){
+import { createBankAccount } from "./bank.js"
 
-    }
-    function getBalance(value){
+let userDataList = []
 
+
+function signup(username,password,data){
+    const usernameExists = data.some(user => user.username === username)
+    if(typeof username !== 'string' || username.length < 4 || username.length > 8){
+       throw new Error("Invalid choice for username")
     }
-    return {deposit, withdraw, getBalance}
+    if(usernameExists){
+        throw new Error("Username Already Exists")
+    }
+    if(typeof password !== 'string' || password < 4 || password > 20){
+       throw new Error("Invalid choice for password")
+    }
+    const id = data.length + 1
+    data.push({
+        id,
+        username,
+        password,
+        account: createBankAccount(0)
+    })
 }
 
-account.getBalance() //4000
+function signIn(username, password){
+    username
+}
+
+try {
+    signup('roji', "imstoopid", userDataList)
+}catch(e){
+    console.log(e)
+}
+console.log(userDataList);
